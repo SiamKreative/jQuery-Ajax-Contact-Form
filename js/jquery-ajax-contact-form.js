@@ -8,9 +8,10 @@ jQuery(document).ready(function ($) {
 		var $form = $(this);
 		var $submitBtn = $('[type="submit"]', $form);
 		var $redirect = $form.attr('data-form-redirect');
+		var $geolocation = $form.attr('data-form-geolocation');
+		var $geoData = '';
 		var $msgSuccess = $form.attr('data-form-success');
 		var $emailTo = $form.attr('action').match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-		var $geoData = '';
 
 		// Avoid multiple form submissions + Update the UI
 		$submitBtn.prop('disabled', false).text('Sending...');
@@ -69,40 +70,48 @@ jQuery(document).ready(function ($) {
 		}
 
 		/**
-		 * Add geolocation data
-		 * http://ip-api.com/docs/api:json
+		 * Optional geolocation data
+		 * To enable it, add the attribute data-form-geolocation="//geolocation-json-endpoint.com"
 		 */
-		$.ajax({
-			dataType: 'json',
-			url: '//freegeoip.net/json/',
-			timeout: 5000
-		})
+		if (typeof $geolocation !== typeof undefined && $geolocation !== false) {
 
-		// Using the done promise callback
-		.done(function (json) {
+			$.ajax({
+				dataType: 'json',
+				url: $geolocation,
+				timeout: 5000
+			})
 
-			// Loop through the JSON object
-			$.each(json, function (index, val) {
-				$geoData += '<input type="hidden" name="geodata_' + index + '" value="' + val + '">';
+			// Using the done promise callback
+			.done(function (json) {
+
+				// Loop through the JSON object
+				$.each(json, function (index, val) {
+					$geoData += '<input type="hidden" name="geodata_' + index + '" value="' + val + '">';
+				});
+
+				// Append geodata only once
+				$form.append($geoData);
+
+			})
+
+			// Detect Network Connection error
+			.fail(function (jqxhr, textStatus, error) {
+
+				console.warn('AJAX error!', error);
+				console.log(jqxhr);
+
+			})
+
+			// Submit the form in every case (success / fail)
+			.always(function () {
+				formAjax();
 			});
 
-			// Append geodata only once
-			$form.append($geoData);
+		} else {
 
-		})
-
-		// Detect Network Connection error
-		.fail(function (jqxhr, textStatus, error) {
-
-			console.warn('AJAX error!', error);
-			console.log(jqxhr);
-
-		})
-
-		// Submit the form in every case (success / fail)
-		.always(function () {
 			formAjax();
-		});
+
+		}
 
 		// Stop the form from submitting the normal way and refreshing the page
 		event.preventDefault();
