@@ -72,29 +72,36 @@ jQuery(document).ready(function ($) {
 		 * Add geolocation data
 		 * http://ip-api.com/docs/api:json
 		 */
-		$.getJSON('//ip-api.com/json', function (json, textStatus) {
+		$.ajax({
+			dataType: 'json',
+			url: '//freegeoip.net/json/',
+			timeout: 5000
+		})
 
-			if (json.status == 'success') {
+		// Using the done promise callback
+		.done(function (json) {
 
-				// Loop through the JSON object
-				$.each(json, function (index, val) {
-					$geoData += '<input type="hidden" name="geodata_' + index + '" value="' + val + '">';
-				});
+			// Loop through the JSON object
+			$.each(json, function (index, val) {
+				$geoData += '<input type="hidden" name="geodata_' + index + '" value="' + val + '">';
+			});
 
-				// Append geodata only once
-				$form.append($geoData);
+			// Append geodata only once
+			$form.append($geoData);
 
-				// Submit the form
-				formAjax();
+		})
 
-			}
+		// Detect Network Connection error
+		.fail(function (jqxhr, textStatus, error) {
 
-			// Something went wrong with the Geolocation. Lets submit the form without any geodata
-			else {
+			console.warn('AJAX error!', error);
+			console.log(jqxhr);
 
-				formAjax();
+		})
 
-			}
+		// Submit the form in every case (success / fail)
+		.always(function () {
+			formAjax();
 		});
 
 		// Stop the form from submitting the normal way and refreshing the page
