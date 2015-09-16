@@ -17,11 +17,23 @@ module.exports = function (grunt) {
 					domain: '<%= pkg.homepage %>'
 				}
 			}
+		},
+		uglify: {
+			options: {
+				mangle: true
+			},
+			'jquery-ajax-contact-form': {
+				files: {
+					'js/<%= pkg.name %>.min.js': ['<%= pkg.main %>']
+				}
+			}
 		}
 	});
 	grunt.loadNpmTasks('grunt-surge');
 	grunt.loadNpmTasks('grunt-notify');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.registerTask('deploy', [
+		'uglify',
 		'surge',
 		'notify:surge'
 	]);

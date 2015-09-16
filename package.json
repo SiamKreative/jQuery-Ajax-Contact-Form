@@ -1,23 +1,24 @@
 {
-	"name": "jquery-ajax-contact-form",
-	"version": "1.0.0",
-	"description": "A modular and elegant way to create Ajax-Powered Contact Forms with jQuery",
-	"author": "Julien Vernet <julien@vernet.me>",
-	"main": "js/jquery-ajax-contact-form.js",
-	"private": true,
-	"license": "MIT",
-	"devDependencies": {
-		"grunt": "*",
-		"grunt-notify": "*",
-		"grunt-surge": "*",
-		"surge": "*"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/SiamKreative/jQuery-Ajax-Contact-Form.git"
-	},
-	"bugs": {
-		"url": "https://github.com/SiamKreative/jQuery-Ajax-Contact-Form/issues"
-	},
-	"homepage": "https://siamkreative-jacf.surge.sh"
+  "name": "jquery-ajax-contact-form",
+  "version": "1.0.0",
+  "description": "A modular and elegant way to create Ajax-Powered Contact Forms with jQuery",
+  "author": "Julien Vernet <julien@vernet.me>",
+  "main": "js/jquery-ajax-contact-form.js",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-notify": "*",
+    "grunt-surge": "*",
+    "surge": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SiamKreative/jQuery-Ajax-Contact-Form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SiamKreative/jQuery-Ajax-Contact-Form/issues"
+  },
+  "homepage": "https://siamkreative-jacf.surge.sh"
 }
