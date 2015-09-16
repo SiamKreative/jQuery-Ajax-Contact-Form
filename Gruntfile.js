@@ -1,5 +1,10 @@
 module.exports = function (grunt) {
 	var path = require('path');
+	var banner = '/*\n<%= pkg.name %> - <%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
+		'<%= pkg.description %>\n' +
+		'Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+		'<%= pkg.repository.url %>\n*/\n';
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		notify: {
@@ -20,7 +25,8 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
-				mangle: true
+				mangle: true,
+				banner: banner
 			},
 			'jquery-ajax-contact-form': {
 				files: {
