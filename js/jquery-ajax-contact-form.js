@@ -6,15 +6,23 @@ jQuery(document).ready(function ($) {
 		 * Cache selectors in variables
 		 */
 		var $form = $(this);
+		var $formStatus = $('.form-status', $form);
 		var $submitBtn = $('[type="submit"]', $form);
+		var $submitBtnDefault = $submitBtn.clone();
 		var $redirect = $form.attr('data-form-redirect');
 		var $geolocation = $form.attr('data-form-geolocation');
 		var $geoData = '';
 		var $msgSuccess = $form.attr('data-form-success');
 		var $emailTo = $form.attr('action').match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
 
-		// Avoid multiple form submissions + Update the UI
-		$submitBtn.prop('disabled', false).text('Sending...');
+		/**
+		 * Avoid multiple form submissions
+		 * Update the UI to show user it's submitting + Remove existing form status
+		 */
+		$submitBtn.prop('disabled', false).text('Sending...').blur();
+		$formStatus.fadeOut('fast', function () {
+			$formStatus.remove();
+		});
 
 		/**
 		 * Process the form using AJAX
@@ -43,9 +51,6 @@ jQuery(document).ready(function ($) {
 
 				} else {
 
-					// Restore submit button
-					$submitBtn.prop('disabled', false).text('Email sent!');
-
 					// Redirect the user to thanks page after form submission (if there is the attribute data-form-redirect)
 					if (typeof $redirect !== typeof undefined && $redirect !== false) {
 
@@ -65,6 +70,11 @@ jQuery(document).ready(function ($) {
 					}
 
 				}
+
+				// Reset the form
+				$form[0].reset();
+				// Reset the submit button
+				$submitBtn.prop('disabled', false).replaceWith($submitBtnDefault.clone());
 
 			});
 		}
