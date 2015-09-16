@@ -1,0 +1,11 @@
+.container {
+	padding-top: 5rem;
+}
+@media (min-width: 75em) {
+	.container {
+		max-width: 60rem;
+	}
+}
+.form-status {
+	margin-top: 1em;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Ajax Contact Form</title>
+	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/demo.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="container text-center">
+
+		<div class="intro">
+			<h1>jQuery Ajax Contact Form</h1>
+			<p class="lead">A modular and elegant way to create Ajax-Powered Contact Forms with jQuery</p>
+		</div>
+
+		<form id="contact_form_inline" class="form-inline" action="//formspree.io/email@example.com" method="POST" data-form-ajax data-form-success="Thank you! Your message has been successfully sent. We will contact you very soon!">
+
+			<input type="hidden" name="_subject" value="New lead!">
+			<input type="text" name="_gotcha" hidden>
+
+			<div class="form-group" if="email_group">
+				<label class="sr-only" for="_replyto">Email address</label>
+				<input required class="form-control form-control-lg" type="email" id="_replyto" name="_replyto" placeholder="Email address">
+			</div>
+			<div class="form-group" if="phone_group">
+				<label class="sr-only" for="phone">Phone Number +66</label>
+				<input required class="form-control form-control-lg" type="text" id="phone" name="phone" placeholder="Phone Number +66">
+			</div>
+
+			<button type="submit" class="btn btn-primary btn-lg">Call / Email me back →</button>
+
+		</form>
+
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+	<script src="js/contact-form-ajax.js"></script>
+
+</body>
+</html>
