@@ -6,6 +6,21 @@
 		max-width: 60rem;
 	}
 }
+.intro .center-block {
+	max-width: 60%;
+}
+.intro .center-block:last-child {
+	margin-bottom: 0;
+}
 .form-status {
 	margin-top: 1em;
+}
+footer.navbar {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	border-top: 1px solid #ddd;
+}
+footer p,
+footer ul {
+	margin: 0;
 }
