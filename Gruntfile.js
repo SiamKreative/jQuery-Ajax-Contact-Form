@@ -1,9 +1,10 @@
 module.exports = function (grunt) {
 	var path = require('path');
-	var banner = '/*\n<%= pkg.name %> - <%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
-		'<%= pkg.description %>\n' +
-		'Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-		'<%= pkg.repository.url %>\n*/\n';
+	var banner = '/*!\n* <%= pkg.name %> - v<%= pkg.version %> - ' +
+		'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+		'* <%= pkg.repository.url %>\n' +
+		'* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
+		'<%= pkg.author %>; Licensed MIT\n*/\n';
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -38,6 +39,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-surge');
 	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.registerTask('default', ['uglify']);
 	grunt.registerTask('deploy', [
 		'uglify',
 		'surge',
